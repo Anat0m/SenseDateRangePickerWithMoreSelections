@@ -1,13 +1,13 @@
 version: 2
 
 defaults: &defaults
-  working_directory: ~/qlik-date-picker
+  working_directory: ~/qlik-date-picker-with-more-selections
   docker:
     - image: circleci/node:stretch
   environment:
     GITHUB_ORG: "qlik-oss"
     GITHUB_REPO: "SenseDateRangePicker"
-    PACKAGE_NAME: "qlik-date-picker"
+    PACKAGE_NAME: "qlik-date-picker-with-more-selections"
 
 jobs:
   build:
@@ -15,7 +15,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/qlik-date-picker
+          at: ~/qlik-date-picker-with-more-selections
       - run:
           name: Install dependencies
           command: yarn install
@@ -29,7 +29,7 @@ jobs:
           environment:
             NODE_ENV: production
       - persist_to_workspace:
-          root: ~/qlik-date-picker
+          root: ~/qlik-date-picker-with-more-selections
           paths:
             - dist
       - store_artifacts:
@@ -56,7 +56,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/qlik-date-picker
+          at: ~/qlik-date-picker-with-more-selections
       - run:
           name: Install ghr
           command: |

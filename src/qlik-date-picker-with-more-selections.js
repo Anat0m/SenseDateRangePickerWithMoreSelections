@@ -21,7 +21,8 @@ define(["qlik", "jquery", "./lib/moment.min", "./calendar-settings", "./lib/enco
         function isQlikCloud(){
             const qlikCloudRegEx = /\.(qlik-stage|qlikcloud)\.com/;
             const matcher = window.location.hostname.match(qlikCloudRegEx) || [];
-            return matcher.length;
+            // return matcher.length;
+            return false;
         }
         function createRanges(props) {
             var ranges = {};
@@ -34,11 +35,35 @@ define(["qlik", "jquery", "./lib/moment.min", "./calendar-settings", "./lib/enco
                 if(props.thisLabel == undefined) {
                     props.thisLabel = props.thisMonth;
                 }
+                if(props.this1 == undefined) {
+                    props.this1 = "m";
+                }
+                if(props.this1Label == undefined) {
+                    props.this1Label = props.thisMonth;
+                }
+                if(props.this2 == undefined) {
+                    props.this2 = "m";
+                }
+                if(props.this2Label == undefined) {
+                    props.this2Label = props.thisMonth;
+                }
                 if(props.last == undefined) {
                     props.last = "m";
                 }
                 if(props.lastLabel == undefined) {
                     props.lastLabel = props.lastMonth;
+                }
+                if(props.last1 == undefined) {
+                    props.last1 = "m";
+                }
+                if(props.lastLabel1 == undefined) {
+                    props.lastLabel1 = props.lastMonth;
+                }
+                if(props.last2 == undefined) {
+                    props.last2 = "m";
+                }
+                if(props.lastLabel2 == undefined) {
+                    props.lastLabel2 = props.lastMonth;
                 }
                 if(numberOf == undefined) {
                     numberOf = 1;
@@ -64,6 +89,24 @@ define(["qlik", "jquery", "./lib/moment.min", "./calendar-settings", "./lib/enco
                 } else if (props.this === "y") {
                     ranges[props.thisLabel] = [moment().startOf('year').startOf('day'), moment().endOf('year').startOf('day')];
                 }
+                if (props.this1 === "d") {
+                    ranges[props.this1Label] = [moment().startOf('day'), moment().startOf('day')];
+                } else if (props.this1 === "m") {
+                    ranges[props.this1Label] = [moment().startOf('month').startOf('day'), moment().endOf('month').startOf('day')];
+                } else if (props.this1 === "q") {
+                    ranges[props.this1Label] = [moment().startOf('quarter').startOf('day'), moment().endOf('quarter').startOf('day')];
+                } else if (props.this1 === "y") {
+                    ranges[props.this1Label] = [moment().startOf('year').startOf('day'), moment().endOf('year').startOf('day')];
+                }
+                if (props.this2 === "d") {
+                    ranges[props.this2Label] = [moment().startOf('day'), moment().startOf('day')];
+                } else if (props.this2 === "m") {
+                    ranges[props.this2Label] = [moment().startOf('month').startOf('day'), moment().endOf('month').startOf('day')];
+                } else if (props.this2 === "q") {
+                    ranges[props.this2Label] = [moment().startOf('quarter').startOf('day'), moment().endOf('quarter').startOf('day')];
+                } else if (props.this2 === "y") {
+                    ranges[props.this2Label] = [moment().startOf('year').startOf('day'), moment().endOf('year').startOf('day')];
+                }
                 if(!includeCurrent) {
                     if (props.last === "d") {
                         ranges[props.lastLabel] = [moment().subtract(numberOf, 'days').startOf('day'), moment().subtract(1, 'days').startOf('day')];
@@ -83,6 +126,50 @@ define(["qlik", "jquery", "./lib/moment.min", "./calendar-settings", "./lib/enco
                         ranges[props.lastLabel] = [moment().subtract(numberOf -1,'quarters').startOf('quarter').startOf('day'), moment().endOf('quarter').startOf('day')];
                     } else if (props.last === "y") {
                         ranges[props.lastLabel] = [moment().subtract(numberOf -1,'years').startOf('year').startOf('day'), moment().endOf('year').startOf('day')];
+                    }
+                }
+
+                if(!includeCurrent) {
+                    if (props.last1 === "d") {
+                        ranges[props.last1Label] = [moment().subtract(numberOf, 'days').startOf('day'), moment().subtract(1, 'days').startOf('day')];
+                    } else if (props.last1 === "m") {
+                        ranges[props.last1Label] = [moment().subtract(numberOf, 'months').startOf('month').startOf('day'), moment().subtract(1, 'months').endOf('month').startOf('day')];
+                    } else if (props.last1 === "q") {
+                        ranges[props.last1Label] = [moment().subtract(numberOf,'quarters').startOf('quarter').startOf('day'), moment().subtract(1, 'quarters').endOf('quarter').startOf('day')];
+                    } else if (props.last1 === "y") {
+                        ranges[props.last1Label] = [moment().subtract(numberOf,'years').startOf('year').startOf('day'), moment().subtract(1,'years').endOf('year').startOf('day')];
+                    }
+                } else {
+                    if (props.last1 === "d") {
+                        ranges[props.last1Label] = [moment().subtract(numberOf -1, 'days').startOf('day'), moment().startOf('day')];
+                    } else if (props.last1 === "m") {
+                        ranges[props.last1Label] = [moment().subtract(numberOf - 1, 'months').startOf('month').startOf('day'), moment().endOf('month').startOf('day')];
+                    } else if (props.last1 === "q") {
+                        ranges[props.last1Label] = [moment().subtract(numberOf -1,'quarters').startOf('quarter').startOf('day'), moment().endOf('quarter').startOf('day')];
+                    } else if (props.last1 === "y") {
+                        ranges[props.last1Label] = [moment().subtract(numberOf -1,'years').startOf('year').startOf('day'), moment().endOf('year').startOf('day')];
+                    }
+                }
+
+                if(!includeCurrent) {
+                    if (props.last2 === "d") {
+                        ranges[props.last2Label] = [moment().subtract(numberOf, 'days').startOf('day'), moment().subtract(1, 'days').startOf('day')];
+                    } else if (props.last2 === "m") {
+                        ranges[props.last2Label] = [moment().subtract(numberOf, 'months').startOf('month').startOf('day'), moment().subtract(1, 'months').endOf('month').startOf('day')];
+                    } else if (props.last2 === "q") {
+                        ranges[props.last2Label] = [moment().subtract(numberOf,'quarters').startOf('quarter').startOf('day'), moment().subtract(1, 'quarters').endOf('quarter').startOf('day')];
+                    } else if (props.last2 === "y") {
+                        ranges[props.last2Label] = [moment().subtract(numberOf,'years').startOf('year').startOf('day'), moment().subtract(1,'years').endOf('year').startOf('day')];
+                    }
+                } else {
+                    if (props.last2 === "d") {
+                        ranges[props.last2Label] = [moment().subtract(numberOf -1, 'days').startOf('day'), moment().startOf('day')];
+                    } else if (props.last2 === "m") {
+                        ranges[props.last2Label] = [moment().subtract(numberOf - 1, 'months').startOf('month').startOf('day'), moment().endOf('month').startOf('day')];
+                    } else if (props.last2 === "q") {
+                        ranges[props.last2Label] = [moment().subtract(numberOf -1,'quarters').startOf('quarter').startOf('day'), moment().endOf('quarter').startOf('day')];
+                    } else if (props.last2 === "y") {
+                        ranges[props.last2Label] = [moment().subtract(numberOf -1,'years').startOf('year').startOf('day'), moment().endOf('year').startOf('day')];
                     }
                 }   
             }       

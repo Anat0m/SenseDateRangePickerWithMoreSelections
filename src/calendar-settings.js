@@ -22,7 +22,8 @@ define(["qlik"], function (qlik) {
     function isQlikCloud(){
         const qlikCloudRegEx = /\.(qlik-stage|qlikcloud)\.com/;
         const matcher = window.location.hostname.match(qlikCloudRegEx) || [];
-        return matcher.length;
+        // return matcher.length;
+        return false;
     }
 
     var dimension = {
@@ -271,6 +272,138 @@ define(["qlik"], function (qlik) {
                             },
                         },
                     },
+                    showCustomRangeThis1: {
+                        type: 'items',
+                        items: {        
+                            ThisMonth1DropDown: {
+                            type: "string",                        
+                            ref: "props.this1",
+                            label: "This",                        
+                            component: "dropdown", 
+                            defaultValue: 'm',                                           
+                            show: function (data) {
+                                return data.props.CustomRangesEnabled;
+                            },
+                            change: function (data) {                                    
+                                if (data.props.this1 === 'd') {
+                                    data.props.this1Label = "This Day";
+                                } else if(data.props.this1 === 'm') {
+                                    data.props.this1Label = "This Month";
+                                } else if(data.props.this1 === 'q') {
+                                    data.props.this1Label = "This Quarter";
+                                } else if(data.props.this1 === 'y') {
+                                    data.props.this1Label = "This Year";
+                                } else if(data.props.this1 === 'n') {
+                                    data.props.this1Label = "";
+                                }
+                            },
+                            options: [{
+                                value: 'd',
+                                label: 'Day'
+                            }, {
+                                value: 'm',
+                                label: 'Month'
+                            }, {
+                                value: 'q',
+                                label: 'Quarter'
+                            }, {
+                                value: 'y',
+                                label: 'Year'
+                            },{
+                                value: 'n',
+                                label: 'None'
+                            }],
+                            },
+                            ThisMonth1: {
+                                type: "string",
+                                ref: "props.this1Label",
+                                defaultValue: "This Month",
+                                expression: 'optional',
+                                show: function (data) {
+                                    return data.props.CustomRangesEnabled;
+                                },
+                                change: function (data) {                                    
+                                    if (data.props.this1 === 'd' && data.props.this1Label === '') {
+                                        data.props.this1Label = "This Day";
+                                    } else if(data.props.this1 === 'm' && data.props.this1Label === '') {
+                                        data.props.this1Label = "This Month";
+                                    } else if(data.props.this1 === 'q' && data.props.this1Label === '') {
+                                        data.props.this1Label = "This Quarter";
+                                    } else if(data.props.this1 === 'y' && data.props.this1Label === '') {
+                                        data.props.this1Label = "This Year";
+                                    } else if(data.props.this1 === 'n') {
+                                        data.props.this1Label = "";
+                                    }
+                                },                               
+                            },
+                        },
+                    },
+                    showCustomRangeThis2: {
+                        type: 'items',
+                        items: {        
+                            ThisMonth2DropDown: {
+                            type: "string",                        
+                            ref: "props.this2",
+                            label: "This",                        
+                            component: "dropdown", 
+                            defaultValue: 'm',                                           
+                            show: function (data) {
+                                return data.props.CustomRangesEnabled;
+                            },
+                            change: function (data) {                                    
+                                if (data.props.this2 === 'd') {
+                                    data.props.this2Label = "This Day";
+                                } else if(data.props.this2 === 'm') {
+                                    data.props.this2Label = "This Month";
+                                } else if(data.props.this2 === 'q') {
+                                    data.props.this2Label = "This Quarter";
+                                } else if(data.props.this2 === 'y') {
+                                    data.props.this2Label = "This Year";
+                                } else if(data.props.this2 === 'n') {
+                                    data.props.this2Label = "";
+                                }
+                            },
+                            options: [{
+                                value: 'd',
+                                label: 'Day'
+                            }, {
+                                value: 'm',
+                                label: 'Month'
+                            }, {
+                                value: 'q',
+                                label: 'Quarter'
+                            }, {
+                                value: 'y',
+                                label: 'Year'
+                            },{
+                                value: 'n',
+                                label: 'None'
+                            }],
+                            },
+                            ThisMonth2: {
+                                type: "string",
+                                ref: "props.this2Label",
+                                defaultValue: "This Month",
+                                expression: 'optional',
+                                show: function (data) {
+                                    return data.props.CustomRangesEnabled;
+                                },
+                                change: function (data) {                                    
+                                    if (data.props.this2 === 'd' && data.props.this2Label === '') {
+                                        data.props.this2Label = "This Day";
+                                    } else if(data.props.this2 === 'm' && data.props.this2Label === '') {
+                                        data.props.this2Label = "This Month";
+                                    } else if(data.props.this2 === 'q' && data.props.this2Label === '') {
+                                        data.props.this2Label = "This Quarter";
+                                    } else if(data.props.this2 === 'y' && data.props.this2Label === '') {
+                                        data.props.this2Label = "This Year";
+                                    } else if(data.props.this2 === 'n') {
+                                        data.props.this2Label = "";
+                                    }
+                                },                               
+                            },
+                        },
+                    },
                     showCustomRangeLast: {
                         type: 'items',
                         items: {     
@@ -355,12 +488,182 @@ define(["qlik"], function (qlik) {
                             }   
                             },
                         },
+                    },
+                    showCustomRangeLast1: {
+                        type: 'items',
+                        items: {     
+                            LastMonth1DropDown: {
+                            type: "string",                        
+                            ref: "props.last1",
+                            label: "Last",
+                            component: "dropdown",
+                            defaultValue: 'm',                                               
+                            show: function (data) {
+                                return data.props.CustomRangesEnabled;
+                            },
+                            change: function (data) {                                    
+                                if (data.props.last1 === 'd') {
+                                    data.props.last1Label = "Last Day";
+                                } else if(data.props.last1 === 'm') {
+                                    data.props.last1Label = "Last Month";
+                                } else if(data.props.last1 === 'q') {
+                                    data.props.last1Label = "Last Quarter";
+                                } else if(data.props.last1 === 'y') {
+                                    data.props.last1Label = "Last Year";
+                                } else if(data.props.last1 === 'n') {
+                                    data.props.last1Label = "";
+                                }
+                            },
+                            options: [{
+                                value: 'd',
+                                label: 'Day'
+                            }, {
+                                value: 'm',
+                                label: 'Month'
+                            }, {
+                                value: 'q',
+                                label: 'Quarter'
+                            }, {
+                                value: 'y',
+                                label: 'Year'
+                            },{
+                                value: 'n',
+                                label: 'None'
+                            }],
+                            },
+                            LastMonth1: {
+                                type: "string",
+                                ref: "props.last1Label",
+                                defaultValue: "Last Month",
+                                expression: 'optional',
+                                show: function (data) {
+                                    return data.props.CustomRangesEnabled;
+                                },
+                                change: function (data) {                                    
+                                    if (data.props.last1 === 'd' && data.props.last1Label === '') {
+                                        data.props.last1Label = "Last Day";
+                                    } else if(data.props.last1 === 'm' && data.props.last1Label === '') {
+                                        data.props.last1Label = "Last Month";
+                                    } else if(data.props.last1 === 'q' && data.props.last1Label === '') {
+                                        data.props.last1Label = "Last Quarter";
+                                    } else if(data.props.last1 === 'y' && data.props.last1Label === '') {
+                                        data.props.last1Label = "Last Year";
+                                    } else if(data.props.last1 === 'n') {
+                                        data.props.last1Label = "";
+                                    }
+                                },
+                            },
+                            numberOf: {
+                                type: 'number',
+                                ref: 'props.numberOf',
+                                label: 'Last number of', 
+                                defaultValue: 1,
+                                show: function (data) {
+                                    return data.props.CustomRangesEnabled && ['d','m','q','y'].indexOf(data.props.last1) > -1;
+                                }
+                            },                        
+                            previousOrLastValues: {
+                            ref: 'props.previousOrLast',
+                            type: 'boolean',
+                            label: 'Include current',
+                            component: 'checkbox',
+                            defaultValue: false,
+                            show: function (data) {
+                                return data.props.CustomRangesEnabled && ['d','m','q','y'].indexOf(data.props.last1) > -1;
+                            }   
+                            },
+                        },
+                    },
+                    showCustomRangeLast2: {
+                        type: 'items',
+                        items: {     
+                            LastMonth2DropDown: {
+                            type: "string",                        
+                            ref: "props.last2",
+                            label: "Last",
+                            component: "dropdown",
+                            defaultValue: 'm',                                               
+                            show: function (data) {
+                                return data.props.CustomRangesEnabled;
+                            },
+                            change: function (data) {                                    
+                                if (data.props.last2 === 'd') {
+                                    data.props.last2Label = "Last Day";
+                                } else if(data.props.last2 === 'm') {
+                                    data.props.last2Label = "Last Month";
+                                } else if(data.props.last2 === 'q') {
+                                    data.props.last2Label = "Last Quarter";
+                                } else if(data.props.last2 === 'y') {
+                                    data.props.last2Label = "Last Year";
+                                } else if(data.props.last2 === 'n') {
+                                    data.props.last2Label = "";
+                                }
+                            },
+                            options: [{
+                                value: 'd',
+                                label: 'Day'
+                            }, {
+                                value: 'm',
+                                label: 'Month'
+                            }, {
+                                value: 'q',
+                                label: 'Quarter'
+                            }, {
+                                value: 'y',
+                                label: 'Year'
+                            },{
+                                value: 'n',
+                                label: 'None'
+                            }],
+                            },
+                            LastMonth2: {
+                                type: "string",
+                                ref: "props.last2Label",
+                                defaultValue: "Last Month",
+                                expression: 'optional',
+                                show: function (data) {
+                                    return data.props.CustomRangesEnabled;
+                                },
+                                change: function (data) {                                    
+                                    if (data.props.last2 === 'd' && data.props.last2Label === '') {
+                                        data.props.last2Label = "Last Day";
+                                    } else if(data.props.last2 === 'm' && data.props.last2Label === '') {
+                                        data.props.last2Label = "Last Month";
+                                    } else if(data.props.last2 === 'q' && data.props.last2Label === '') {
+                                        data.props.last2Label = "Last Quarter";
+                                    } else if(data.props.last2 === 'y' && data.props.last2Label === '') {
+                                        data.props.last2Label = "Last Year";
+                                    } else if(data.props.last2 === 'n') {
+                                        data.props.last2Label = "";
+                                    }
+                                },
+                            },
+                            numberOf: {
+                                type: 'number',
+                                ref: 'props.numberOf',
+                                label: 'Last number of', 
+                                defaultValue: 1,
+                                show: function (data) {
+                                    return data.props.CustomRangesEnabled && ['d','m','q','y'].indexOf(data.props.last2) > -1;
+                                }
+                            },                        
+                            previousOrLastValues: {
+                            ref: 'props.previousOrLast',
+                            type: 'boolean',
+                            label: 'Include current',
+                            component: 'checkbox',
+                            defaultValue: false,
+                            show: function (data) {
+                                return data.props.CustomRangesEnabled && ['d','m','q','y'].indexOf(data.props.last2) > -1;
+                            }   
+                            },
+                        },
                     },  
                 },
             },
             header1: {
                 type: "items",
-                label: "Language and labels",
+                label: "Language and labelz",
                 items: {
                     Language: {
                         type: "string",
@@ -476,12 +779,12 @@ define(["qlik"], function (qlik) {
                         show: function (data) {
                             return data.props.CustomRangesEnabled;
                         }
-                    }
+                    },
                 }
             },
             header1: {
                 type: "items",
-                label: "Language and labels",
+                label: "Language and labelz",
                 items: {
                     Language: {
                         type: "string",
@@ -521,7 +824,7 @@ define(["qlik"], function (qlik) {
 		component: "items",
 		items: {
 			header: {
-				label: 'Date picker',
+				label: 'Date picker with more selections',
 				style: 'header',
 				component: 'text'
 			},

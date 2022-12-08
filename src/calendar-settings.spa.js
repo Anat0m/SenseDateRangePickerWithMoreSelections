@@ -41,7 +41,7 @@ define([], function() {
             },
             header1: {
                 type: "items",
-                label: "Language and labels",
+                label: "Language and labelz",
                 items: {
                         Language:{
                             type: "string",  

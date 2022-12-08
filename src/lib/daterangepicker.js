@@ -608,7 +608,8 @@
           isQlikCloud: function() {
             const qlikCloudRegEx = /\.(qlik-stage|qlikcloud)\.com/;
             const matcher = window.location.hostname.match(qlikCloudRegEx) || [];
-            return matcher.length;
+            // return matcher.length;
+            return false;
           },
 
           renderCalendar: function(side) {

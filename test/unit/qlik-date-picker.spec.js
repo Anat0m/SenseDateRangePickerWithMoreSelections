@@ -2,7 +2,7 @@
 
 define(['chai',
     '../../../src/calendar-settings',
-    '../../../src/qlik-date-picker'],
+    '../../../src/qlik-date-picker-with-more-selections'],
     function (chai, calendarSettings, dateRangePicker) {
         const expect = chai.expect;
 

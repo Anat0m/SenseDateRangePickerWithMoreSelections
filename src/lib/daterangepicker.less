@@ -13,13 +13,13 @@ changed left and right rule names to prevent clash with sense client css */
   z-index: 5000!important;
 }
 
-.qv-mode-edit .qv-object-qlik-date-picker .qv-object-content-container {
+.qv-mode-edit .qv-object-qlik-date-picker-with-more-selections .qv-object-content-container {
   div.requirements span {
     text-align: center;
   }
 }
 
-.qv-object-qlik-date-picker {
+.qv-object-qlik-date-picker-with-more-selections {
   .show-range {
     background: #fff; 
     cursor: pointer; 
@@ -349,6 +349,8 @@ changed left and right rule names to prevent clash with sense client css */
       padding: 0;
       margin-top: 12px;
       padding-bottom: 8px;
+      overflow-y: scroll;
+      height: inherit;
     }
     li {
       font-size: 13px;

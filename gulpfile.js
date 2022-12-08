@@ -10,11 +10,11 @@ var zip = require('gulp-zip');
 var DIST = './dist',
 	SRC = './src',
 	NAME = pkg.name,
-	VERSION = process.env.VERSION || 'local-dev';
+	VERSION = process.env.VERSION || '1.0.5';
 
 gulp.task('qext', function () {
 	var qext = {
-		name: 'Date picker',
+		name: 'Date picker with more selections',
 		type: 'visualization',
 		description: pkg.description + '\nVersion: ' + VERSION,
 		version: VERSION,
